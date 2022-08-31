@@ -29,7 +29,3 @@ results = spotify.search(
 songs = results["tracks"]
 
 print(songs["items"][0]["id"])
-
-# if len(items) > 0:
-#     artist = items[0]
-#     print(artist["name"], artist["images"][0]["url"])

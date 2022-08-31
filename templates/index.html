@@ -5,12 +5,26 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="{{ url_for('static', path='/styles.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="../static/styles.css">
+    <!-- <link href="{{ url_for('static', path='/styles.css') }}" rel="stylesheet"> -->
     <title>Spotify Search</title>
 </head>
 
 <body>
     <h1>nuts</h1>
+    <div class="wrap">
+        <div class="search">
+            <input type="text" class="searchTerm" placeholder="Enter the song name">
+        </div>
+        <div class="search">
+            <input type="text" class="searchTerm" placeholder="Enter the artist name">
+        </div>
+        <div class="search">
+            <button type="submit" class="searchButton">
+                <span>Search</span>
+            </button>
+        </div>
+    </div>
 </body>
 
 </html>

@@ -20,12 +20,15 @@ spotify = spotipy.Spotify(
 #     print(track)
 #     print()
 
-song_name = "Karma Police"
-artist_name = "Radiohead"
 
-results = spotify.search(
-    q="track:" + song_name + ", artist:" + artist_name, type="track", limit=1
-)
-songs = results["tracks"]
+def get_song_id(song, artist):
 
-print(songs["items"][0]["id"])
+    results = spotify.search(
+        q="track:" + song + ", artist:" + artist, type="track", limit=1
+    )
+    songs = results["tracks"]
+
+    return songs["items"][0]["id"]
+
+
+print(spotify.audio_features(get_song_id("karma police", "radiohead")))

@@ -1,2 +1,10 @@
-# virtual environment
+# venv
 /env 
+
+# python
+/__pycache__
+/.vscode
+.cache
+
+# project files
+credentials.py

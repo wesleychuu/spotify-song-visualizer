@@ -13,12 +13,12 @@
 <body>
     <h1>nuts</h1>
     <div class="wrap">
-        <form action="/songs">
+        <form method="post">
             <div class="search">
-                <input type="text" name="songQuery" class="searchTerm" placeholder="Enter the song name">
+                <input type="text" name="song_query" class="searchTerm" placeholder="Enter the song name" required>
             </div>
             <div class="search">
-                <input type="text" name="artistQuery" class="searchTerm" placeholder="Enter the artist name">
+                <input type="text" name="artist_query" class="searchTerm" placeholder="Enter the artist name" required>
             </div>
             <div class="search">
                 <button type="submit" class="searchButton">

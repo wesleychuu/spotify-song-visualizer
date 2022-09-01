@@ -1,7 +1,8 @@
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, Form 
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+from starlette.responses import RedirectResponse
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 import credentials
@@ -19,12 +20,17 @@ spotify = spotipy.Spotify(
     )
 )
 
+@app.get("/")
+async def redirect_home():
+    return RedirectResponse("/home")
 
-@app.get("/", response_class=HTMLResponse)
-async def root(request: Request):
+@app.get("/home", response_class=HTMLResponse)
+async def home(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
+
+@app.post("/")
 
 
 @app.get("/{song_id}")
 async def visualize_song(song_id):
-    return spotify.audio_features(song_id)
+    return spotify.audio_features(song_id)[0], spotify.track(song_id)

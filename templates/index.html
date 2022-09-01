@@ -13,17 +13,19 @@
 <body>
     <h1>nuts</h1>
     <div class="wrap">
-        <div class="search">
-            <input type="text" class="searchTerm" placeholder="Enter the song name">
-        </div>
-        <div class="search">
-            <input type="text" class="searchTerm" placeholder="Enter the artist name">
-        </div>
-        <div class="search">
-            <button type="submit" class="searchButton">
-                <span>Search</span>
-            </button>
-        </div>
+        <form action="/songs">
+            <div class="search">
+                <input type="text" name="songQuery" class="searchTerm" placeholder="Enter the song name">
+            </div>
+            <div class="search">
+                <input type="text" name="artistQuery" class="searchTerm" placeholder="Enter the artist name">
+            </div>
+            <div class="search">
+                <button type="submit" class="searchButton">
+                    <span>Search</span>
+                </button>
+            </div>
+        </form>
     </div>
 </body>
 

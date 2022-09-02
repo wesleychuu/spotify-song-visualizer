@@ -1,0 +1,112 @@
+:root {
+    --spotify_green: #1DB954;
+    --spotify_black: #191414;
+    --spotify_gray: #635656;
+}
+
+*, p, h2 {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  html {
+    font-size: 62.5%;
+  }
+  
+  body {
+    background-color: var(--spotify_green);
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  .cards {
+    width: 50%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-direction: column;
+    flex-wrap: wrap;
+    background-color: white;
+    padding: 3rem;
+    margin: 100px auto;
+    border-radius: 4px;
+    box-shadow: 0 22px 50px rgba(14,21,47, .2), 0 8px 20px rgba(14,21,47, .2);
+  }
+  
+  .artist-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+
+  .artist-description-card {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: left;
+    /* border: #191414 1px solid; */
+  }
+
+  .song-name {
+    /* margin-bottom: 2rem; */
+    font-size: 3.6rem;
+    font-weight: 700;
+    color: var(--spotify_black);
+  }
+
+  .artist-name {
+    margin-top: 0.5rem;
+    font-size: 2.6rem;
+    font-weight: 700;
+    color: var(--spotify_gray);
+  }
+
+  .card {
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    width: 100%;
+    transition: .2s ease;
+    cursor: pointer;
+    text-align: center;
+  }
+  
+  .card:hover {
+    background-color: #f6f6f6;
+  }
+  
+  .card__img {
+    width: 40%;
+  }
+  
+  .card__title {
+    /* margin-bottom: 2rem; */
+    font-size: 1.75rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--spotify_green);
+  }
+  
+  .card__paragraph {
+    margin-left: 2rem;
+    font-size: 1.5rem;
+    color: var(--spotify_gray);
+  }
+
+  .button {
+    padding: 1rem;
+    width: 100%;
+    border: 1px solid var(--spotify_green);
+    background: var(--spotify_green);
+    text-align: center;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 2rem;
+    font-weight: 700;
+  }
+
+  
+  

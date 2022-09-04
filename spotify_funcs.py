@@ -9,20 +9,7 @@ spotify = spotipy.Spotify(
 )
 
 
-# results = spotify.artist_top_tracks(lz_uri)
-
-# for track in results["tracks"][:10]:
-#     print("track    : " + track["name"])
-#     print("audio    : " + track["preview_url"])
-#     print("cover art: " + track["album"]["images"][0]["url"])
-#     print()
-
-#     print(track)
-#     print()
-
-
 def get_song_id(song: str, artist: str):
-
     results = spotify.search(
         q="track:" + song + ", artist:" + artist, type="track"
     )
@@ -31,8 +18,25 @@ def get_song_id(song: str, artist: str):
     return songs["items"][0]["id"]
 
 
-# print(spotify.audio_features(get_song_id("karma police", "radiohead"))[0])
+def translate_key(key: int):
+    key_dict = {
+        -1: "None",
+        0: "C",
+        1: "C♯/D♭",
+        2: "D",
+        3: "D♯/E♭",
+        4: "E",
+        5: "F",
+        6: "F♯/G♭",
+        7: "G",
+        8: "G♯/A♭",
+        9: "A",
+        10: "A♯/B♭",
+        11: "B"
+    }
 
-# print(spotify.track(get_song_id("karma police", "radiohead")))
+    if key > 11 or key < -1:
+        return ValueError
+    else:
+        return key_dict.get(key)
 
-# print(get_song_id("roundabout", "yes"))

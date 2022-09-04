@@ -7,7 +7,7 @@ class Song(BaseModel):
     track_link: str
     image: Union[str, None] = None
     danceability: Union[float, None] = None
-    key: Union[int, None] = None
+    key: str
     tempo: Union[float, None] = None
     time_signature: Union[int, None] = None
     

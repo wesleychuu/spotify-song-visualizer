@@ -58,7 +58,7 @@ async def get_song(request: Request, song_id: str):
 
     song = models.Song(
         song_name=song_name, artist_name=artist_name, track_link=song_link, image=cover_art,
-        danceability=danceability, key=key, tempo=tempo, time_signature=time_signature
+        danceability=danceability, key=spotify_funcs.translate_key(int(key)), tempo=tempo, time_signature=time_signature
     )
     return templates.TemplateResponse("song.html", {"request": request, "song": song})
 

@@ -1,3 +1,4 @@
+from email.mime import audio
 from fastapi import FastAPI, Request, Form 
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
@@ -51,14 +52,19 @@ async def get_song(request: Request, song_id: str):
     cover_art = track['album']['images'][0]['url']
 
     audio_features = spotify.audio_features(song_id)[0]
-    danceability = audio_features['danceability']
     key = audio_features['key']
     tempo = audio_features['tempo']
     time_signature = audio_features['time_signature']
+    acousticness = audio_features['acousticness']
+    danceability = audio_features['danceability']
+    energy = audio_features['energy']
+    instrumentalness = audio_features['instrumentalness']
+    liveness = audio_features['liveness']
+    valence = audio_features['valence']
+
 
     song = models.Song(
-        song_name=song_name, artist_name=artist_name, track_link=song_link, image=cover_art,
-        danceability=danceability, key=spotify_funcs.translate_key(int(key)), tempo=tempo, time_signature=time_signature
+        song_name=song_name, artist_name=artist_name, track_link=song_link, image=cover_art, key=spotify_funcs.translate_key(int(key)), tempo=tempo, time_signature=time_signature, acousticness=acousticness, danceability=danceability, energy=energy, instrumentalness=instrumentalness, liveness=liveness, valence=valence
     )
     return templates.TemplateResponse("song.html", {"request": request, "song": song})
 

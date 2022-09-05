@@ -1,4 +1,3 @@
-from email.mime import audio
 from fastapi import FastAPI, Request, Form
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
@@ -8,8 +7,8 @@ import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 import uvicorn
 import credentials
-import spotify_funcs
-import models
+import modules.spotify_funcs as spotify_funcs
+import models.models as models
 
 app = FastAPI()
 
@@ -35,16 +34,13 @@ async def get_home(request: Request):
 
 @app.post("/home", response_class=HTMLResponse)
 async def post_home(
-    request: Request, song_query: str = Form(...), artist_query: str = Form(...)
+    request: Request, 
+    song_query: str = Form(...), 
+    artist_query: str = Form(...)
 ):
     song_id = spotify_funcs.get_song_id(song_query, artist_query)
     return RedirectResponse(url=f"/song/{song_id}", status_code=303)
-
-
-# @app.get("/song/{song_id}")
-# async def visualize_song(song_id):
-#     return spotify.audio_features(song_id)[0], spotify.track(song_id)
-
+        
 
 @app.get("/song/{song_id}")
 async def get_song(request: Request, song_id: str):

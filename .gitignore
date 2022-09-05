@@ -2,9 +2,10 @@
 /env 
 
 # python
-/__pycache__
+__pycache__
 /.vscode
 .cache
+
 
 # project files
 credentials.py

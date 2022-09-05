@@ -11,8 +11,13 @@
 </head>
 
 <body>
-    <h1>nuts</h1>
+    <h1>Spotify Song Visualizer</h1>
     <div class="wrap">
+        {% for message in get_flashed_messages(request) %}
+        <div class="flash">
+            <p>{{ message.message }}</p>
+        </div>
+        {% endfor %}
         <form method="post">
             <div class="search">
                 <input type="text" name="song_query" class="searchTerm" placeholder="Enter the song name" required>

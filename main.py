@@ -3,17 +3,25 @@ from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from starlette.responses import RedirectResponse
+from starlette.middleware import Middleware
+from starlette.middleware.sessions import SessionMiddleware
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 import uvicorn
 import credentials
 import modules.spotify_funcs as spotify_funcs
 import models.models as models
+import modules.flash as flash
 
-app = FastAPI()
+
+app = FastAPI(middleware=[Middleware(SessionMiddleware, secret_key='super-secret')])
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
+
+
 templates = Jinja2Templates(directory="templates")
+templates.env.globals['get_flashed_messages'] = flash.get_flashed_messages
+
 
 spotify = spotipy.Spotify(
     client_credentials_manager=SpotifyClientCredentials(
@@ -38,8 +46,12 @@ async def post_home(
     song_query: str = Form(...), 
     artist_query: str = Form(...)
 ):
-    song_id = spotify_funcs.get_song_id(song_query, artist_query)
-    return RedirectResponse(url=f"/song/{song_id}", status_code=303)
+    try:
+        song_id = spotify_funcs.get_song_id(song_query, artist_query)
+        return RedirectResponse(url=f"/song/{song_id}", status_code=303)
+    except: 
+        flash.flash(request, "Song does not exist", "danger")
+        return templates.TemplateResponse("index.html", {"request": request})
         
 
 @app.get("/song/{song_id}")

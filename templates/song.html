@@ -7,6 +7,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/song.css">
     <title>Spotify Visualizer</title>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {
+            callback: drawChart,
+            packages: ['corechart']
+        });
+
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+                ["Feature", "Intensity", { role: "style" }],
+                ["Acousticness", {{ song.acousticness }}, "#1DB954"],
+                ["Danceability", {{ song.danceability }}, "#1DB954"],
+                ["Energy", {{ song.energy }}, "#1DB954"],
+                ["Instrumentalness", {{ song.instrumentalness }}, "#1DB954"],
+                ["Liveness", {{ song.liveness }}, "#1DB954"],
+                ["Valence", {{ song.valence }}, "#1DB954"],
+            ]);
+
+        var view = new google.visualization.DataView(data);
+        view.setColumns([0, 1,
+            {
+                calc: "stringify",
+                sourceColumn: 1,
+                type: "string",
+                role: "annotation"
+            },
+            2]);
+
+        var options = {
+            title: "Intensity of Audio Features, by Percentage",
+            width: "50%",
+            height: "50%",
+            bar: { groupWidth: "95%" },
+            legend: { position: "none" },
+            vAxis: { minValue: 0 },
+        };
+        var chart = new google.visualization.BarChart(document.getElementById("barchart_values"));
+        chart.draw(view, options);
+        }
+    </script>
+
 </head>
 
 <body>
@@ -37,10 +81,7 @@
             <h2 class="card__title">time signature</h2>
             <div class="card__paragraph">{{ song.time_signature }} / 4</div>
         </div>
-        <div class="card">
-            <h2 class="card__title">danceability</h2>
-            <div class="card__paragraph">{{ song.danceability }}</div>
-        </div>
+        <div class="card" id="barchart_values"></div>
         <div>
             <form action="/home">
                 <input type="submit" class="button" value="BACK" />

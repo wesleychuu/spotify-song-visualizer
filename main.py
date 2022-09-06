@@ -8,10 +8,10 @@ from starlette.middleware.sessions import SessionMiddleware
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 import uvicorn
-import credentials
 import modules.spotify_funcs as spotify_funcs
 import models.models as models
 import modules.flash as flash
+import os
 
 
 app = FastAPI(middleware=[Middleware(SessionMiddleware, secret_key='super-secret')])
@@ -25,7 +25,7 @@ templates.env.globals['get_flashed_messages'] = flash.get_flashed_messages
 
 spotify = spotipy.Spotify(
     client_credentials_manager=SpotifyClientCredentials(
-        client_id=credentials.CLIENT_ID, client_secret=credentials.CLIENT_SECRET
+        client_id=os.environ["CLIENT_ID"], client_secret=os.environ["CLIENT_SECRET"]
     )
 )
 

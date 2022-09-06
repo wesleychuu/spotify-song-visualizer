@@ -4,7 +4,7 @@ import os
 
 spotify = spotipy.Spotify(
     client_credentials_manager=SpotifyClientCredentials(
-        client_id=os.environ["CLIENT_ID"], client_secret=os.environ["CLIENT_SECRET"]
+        client_id=os.environ.get("CLIENT_ID"), client_secret=os.environ.get("CLIENT_SECRET")
     )
 )
 

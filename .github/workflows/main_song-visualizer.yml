@@ -24,6 +24,7 @@ jobs:
           python-version: '3.9'
 
       - name: Environment variables
+        run: python -c 'import os;print(os.environ)'
         env:
           CLIENT_ID: ${{ secrets.CLIENT_ID }}
           CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
